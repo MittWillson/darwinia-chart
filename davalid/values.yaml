@@ -9,8 +9,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 config:
-  # darwinia or crab, default is darwinia
-  runtime:
+  # e.g darwinia and crab, default is darwinia
+  network:
   # validator or node, default value is node
   mode:
   # show your self
@@ -21,6 +21,15 @@ config:
   targetGasPrice:
   # default peers is 25
   peers:
+
+snapshot:
+  # pruning mode, true will add an init container, only work when data is empty
+  enabled: false
+  image:
+    repository: ghcr.io/mittwillson/darwinia-snapshot-init
+    tag: "v0.2.3"
+  # archive link of https://snapshots.darwinia.network/
+  archive:
 
 # runtime args
 args: []
@@ -169,3 +178,4 @@ persistence:
     # -- Set to true to retain the PVC upon `helm uninstall`
     retain: false
 
+initContainers: []
