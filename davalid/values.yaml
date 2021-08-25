@@ -90,13 +90,20 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
     hosts:
-      - host: http.example.local
+      - host: darwinia.mitt.exmaple
         paths:
           - path: /
             pathType: Prefix
             service:
-              name:
-              port:
+              name: main
+              port: 9933
+      - host: rpc.darwinia.mitt.exmaple
+        paths:
+          - path: /
+            pathType: Prefix
+            service:
+              name: main
+              port: 9944
     tls: []
     #  - secretName: chart-example-tls
     #    hosts:
