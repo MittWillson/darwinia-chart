@@ -3,22 +3,29 @@
 {{- define "davalid.command" -}}
 {{- $runtime := .Values.config.runtime | default "darwinia" -}}
 {{- $mode := .Values.config.mode | default "node" -}}
+{{- $isValidator := eq $mode "validator" }}
 command: ["darwinia"]
 args:
   - "--base-path"
   - "/data"
+  - "--rpc-port"
+  - "9933"
+  - "--ws-port"
+  - "9944"
   - "--name"
   - {{ include "davalid.runnerName" . | quote }}
   {{- if $runtime }}
   - "--chain"
   - {{ $runtime | quote }}
   {{- end }}
-  {{- if eq $mode "validator" }}
+  {{- if $isValidator }}
   - "--unsafe-rpc-external"
   - "--rpc-methods"
-  - "Unsafe"
+  - "Auto"
+  - "--validator"
   {{- end }}
-  {{- if .Values.config.external }}
+  {{- if and (not $isValidator) .Values.config.external }}
+  - "--rpc-external"
   - "--ws-external"
   - "--rpc-cors"
   - "all"
@@ -26,6 +33,10 @@ args:
   {{- if .Values.config.targetGasPrice }}
   - "--target-gas-price"
   - {{ .Values.config.targetGasPrice | quote }}
+  {{- end }}
+  {{- if .Values.config.peers }}
+  - "--out-peers"
+  - {{ .Values.config.peers | quote }}
   {{- end }}
   {{- range $arg := .Values.args }}
   - {{ $arg | quote }}

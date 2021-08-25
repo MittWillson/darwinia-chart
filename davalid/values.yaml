@@ -19,6 +19,8 @@ config:
   external: true
   # default and recommend value is 5000000000
   targetGasPrice:
+  # default peers is 25
+  peers:
 
 # runtime args
 args: []
@@ -55,6 +57,7 @@ hostNetwork: false
 
 # -- Defaults to "ClusterFirst" if hostNetwork is false and "ClusterFirstWithHostNet" if hostNetwork is true.
 dnsPolicy:  # ClusterFirst
+dnsConfig: {}
 
 podAnnotations: {}
 
