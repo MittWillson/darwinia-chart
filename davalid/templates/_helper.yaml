@@ -1,0 +1,3 @@
+{{- define "davalid.runnerName" -}}
+{{ print (.Values.config.name | default "Davalid") }}
+{{- end -}}

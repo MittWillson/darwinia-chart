@@ -8,6 +8,21 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+config:
+  # darwinia or crab, default is darwinia
+  runtime:
+  # validator or node, default value is node
+  mode:
+  # show your self
+  name: Davalid
+  # if you want remote connect
+  external: true
+  # default and recommend value is 5000000000
+  targetGasPrice:
+
+# runtime args
+args: []
+
 controller:
   # -- enable the controller.
   enabled: true

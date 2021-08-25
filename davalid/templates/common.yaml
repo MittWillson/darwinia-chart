@@ -1,1 +1,36 @@
+{{- include "common.values.setup" . }}
+
+{{- define "davalid.command" -}}
+{{- $runtime := .Values.config.runtime | default "darwinia" -}}
+{{- $mode := .Values.config.mode | default "node" -}}
+command: ["darwinia"]
+args:
+  - "--base-path"
+  - "/data"
+  - "--name"
+  - {{ include "davalid.runnerName" . | quote }}
+  {{- if $runtime }}
+  - "--chain"
+  - {{ $runtime | quote }}
+  {{- end }}
+  {{- if eq $mode "validator" }}
+  - "--unsafe-rpc-external"
+  - "--rpc-methods"
+  - "Unsafe"
+  {{- end }}
+  {{- if .Values.config.external }}
+  - "--ws-external"
+  - "--rpc-cors"
+  - "all"
+  {{- end }}
+  {{- if .Values.config.targetGasPrice }}
+  - "--target-gas-price"
+  - {{ .Values.config.targetGasPrice | quote }}
+  {{- end }}
+  {{- range $arg := .Values.args }}
+  - {{ $arg | quote }}
+  {{- end }}
+{{- end -}}
+
+{{- $_ := merge .Values (include "davalid.command" . | fromYaml) -}}
 {{ include "common.all" . }}
