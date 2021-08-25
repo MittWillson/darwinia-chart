@@ -19,8 +19,17 @@ config:
   external: true
   # default and recommend value is 5000000000
   targetGasPrice:
-  # default peers is 25
-  peers:
+  # default in-peers is 25
+  inPeers:
+  # default in-peers is 25
+  outPeers:
+  # When running as a simple sync node (above), only the state of the past 256 blocks will be kept
+  # When validating, it defaults to archive mode
+  # If you want running archive mode without validator, set archive
+  pruning:
+  # If you are first sync archive node, set true will faster, after synced you should set false
+  # This will take more memory and cpu
+  fastSync: false
 
 snapshot:
   # pruning mode, true will add an init container, only work when data is empty

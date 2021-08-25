@@ -4,6 +4,7 @@
 {{- $runtime := .Values.config.network | default "darwinia" -}}
 {{- $mode := .Values.config.mode | default "node" -}}
 {{- $isValidator := eq $mode "validator" }}
+{{- $pruning := $isValidator | ternary "archive" .Values.config.pruning -}}
 command: ["darwinia"]
 args:
   - "--base-path"
@@ -24,6 +25,14 @@ args:
   - "Unsafe"
   - "--validator"
   {{- end }}
+  {{- if $pruning }}
+  - "--pruning"
+  - {{ $pruning | quote }}
+  {{- end }}
+  {{- if .Values.config.fastSync }}
+  - "--wasm-execution"
+  - "Compiled"
+  {{- end }}
   {{- if and (not $isValidator) .Values.config.external }}
   - "--rpc-external"
   - "--ws-external"
@@ -34,9 +43,13 @@ args:
   - "--target-gas-price"
   - {{ .Values.config.targetGasPrice | quote }}
   {{- end }}
-  {{- if .Values.config.peers }}
+  {{- if .Values.config.outPeers }}
   - "--out-peers"
-  - {{ .Values.config.peers | quote }}
+  - {{ .Values.config.outPeers | quote }}
+  {{- end }}
+  {{- if .Values.config.inPeers }}
+  - "--in-peers"
+  - {{ .Values.config.inPeers | quote }}
   {{- end }}
   {{- range $arg := .Values.args }}
   - {{ $arg | quote }}
