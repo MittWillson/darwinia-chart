@@ -95,14 +95,12 @@ ingress:
           - path: /
             pathType: Prefix
             service:
-              name: main
               port: 9933
       - host: rpc.darwinia.mitt.exmaple
         paths:
           - path: /
             pathType: Prefix
             service:
-              name: main
               port: 9944
     tls: []
     #  - secretName: chart-example-tls
