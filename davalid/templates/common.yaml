@@ -33,7 +33,7 @@ args:
   - "--wasm-execution"
   - "Compiled"
   {{- end }}
-  {{- if and (not $isValidator) .Values.config.external }}
+  {{- if .Values.config.external }}
   - "--rpc-external"
   - "--ws-external"
   - "--rpc-cors"
