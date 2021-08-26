@@ -17,6 +17,8 @@ config:
   name: Davalid
   # if you want remote connect
   external: true
+  # only work if external is true
+  cors:
   # default and recommend value is 5000000000
   targetGasPrice:
   # default in-peers is 25

@@ -36,8 +36,10 @@ args:
   {{- if .Values.config.external }}
   - "--rpc-external"
   - "--ws-external"
+  {{- if .Values.config.cors }}
   - "--rpc-cors"
   - "all"
+  {{- end }}
   {{- end }}
   {{- if .Values.config.targetGasPrice }}
   - "--target-gas-price"
