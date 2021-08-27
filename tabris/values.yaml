@@ -48,6 +48,11 @@ snapshot:
 # runtime args
 args: []
 
+controller:
+  enabled: true
+  # Valid options are deployment, daemonset or statefulset
+  type: statefulset
+
 # -- When using hostNetwork make sure you set dnsPolicy to `ClusterFirstWithHostNet`
 hostNetwork: false
 
