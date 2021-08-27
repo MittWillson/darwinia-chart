@@ -14,7 +14,7 @@ config:
   # validator or node, default value is node
   mode:
   # show your self
-  name: Davalid
+  name: Tabris
   # if you want remote connect
   external: true
   # only work if external is true

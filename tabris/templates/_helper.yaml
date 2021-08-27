@@ -1,0 +1,3 @@
+{{- define "tabris.runnerName" -}}
+{{ print (.Values.config.name | default "Tabris") }}
+{{- end -}}
