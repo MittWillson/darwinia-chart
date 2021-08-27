@@ -9,24 +9,25 @@ nameOverride: ""
 fullnameOverride: ""
 
 config:
-  # e.g darwinia and crab, default is darwinia
+  # E.g. darwinia and crab, default is darwinia
   network:
-  # validator or node, default value is node
+  # Validator or node, default value is node
   mode:
-  # show your self
+  # Show your self
   name: Tabris
-  # if you want remote connect
+  # If you want remote connect
+  # If you are running validator mode, this should false or set unsafeExternal true
   external: true
   # WARNING!! this could be danger, only work when external is true
   # WARNING!! If you want to get session key, you should use port-forward by safe
   unsafeExternal: false
-  # only work if external is true
+  # Only work if external is true
   cors:
-  # default and recommend value is 5000000000
+  # Default and recommend value is 5000000000
   targetGasPrice:
-  # default in-peers is 25
+  # Default in-peers is 25
   inPeers:
-  # default in-peers is 25
+  # Default in-peers is 25
   outPeers:
   # When running as a simple sync node (above), only the state of the past 256 blocks will be kept
   # When validating, it defaults to archive mode
