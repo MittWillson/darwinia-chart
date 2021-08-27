@@ -20,9 +20,6 @@ args:
   - {{ $runtime | quote }}
   {{- end }}
   {{- if $isValidator }}
-  - "--unsafe-rpc-external"
-  - "--rpc-methods"
-  - "Unsafe"
   - "--validator"
   {{- end }}
   {{- if $pruning }}
@@ -36,6 +33,11 @@ args:
   {{- if .Values.config.external }}
   - "--rpc-external"
   - "--ws-external"
+  {{- if .Values.config.unsafeExternal }}
+  - "--unsafe-rpc-external"
+  - "--rpc-methods"
+  - "Unsafe"
+  {{- end }}
   {{- if .Values.config.cors }}
   - "--rpc-cors"
   - "all"
