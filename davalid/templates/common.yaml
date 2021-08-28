@@ -1,6 +1,6 @@
 {{- include "common.values.setup" . }}
 
-{{- define "tabris.command" -}}
+{{- define "davalid.command" -}}
 {{- $runtime := .Values.config.network | default "darwinia" -}}
 {{- $mode := .Values.config.mode | default "node" -}}
 {{- $isValidator := eq $mode "validator" }}
@@ -14,7 +14,7 @@ args:
   - "--ws-port"
   - "9944"
   - "--name"
-  - {{ include "tabris.runnerName" . | quote }}
+  - {{ include "davalid.runnerName" . | quote }}
   {{- if $runtime }}
   - "--chain"
   - {{ $runtime | quote }}
@@ -60,7 +60,7 @@ args:
   {{- end }}
 {{- end -}}
 
-{{- define "tabris.storage" -}}
+{{- define "davalid.storage" -}}
 {{- if .Values.snapshot.enabled -}}
 persistence:
   {{ .Values.persistence | toYaml | indent 2 }}
@@ -70,7 +70,7 @@ persistence:
 {{- end -}}
 {{- end -}}
 
-{{- define "tabris.snapshot" -}}
+{{- define "davalid.snapshot" -}}
 {{- if .Values.snapshot.enabled -}}
 {{- $runtime := .Values.config.network | default "darwinia" }}
 initContainers:
@@ -124,8 +124,8 @@ initContainers:
 {{- end -}}
 {{- end -}}
 
-{{- $snapshot := include "tabris.snapshot" . | fromYaml }}
+{{- $snapshot := include "davalid.snapshot" . | fromYaml }}
 {{- $_ := mustMergeOverwrite .Values $snapshot -}}
-{{- $_ = mustMergeOverwrite .Values (include "tabris.command" . | fromYaml) -}}
-{{- $_ = mustMergeOverwrite .Values (include "tabris.storage" . | fromYaml) -}}
+{{- $_ = mustMergeOverwrite .Values (include "davalid.command" . | fromYaml) -}}
+{{- $_ = mustMergeOverwrite .Values (include "davalid.storage" . | fromYaml) -}}
 {{ include "common.all" . }}

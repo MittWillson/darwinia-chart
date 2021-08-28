@@ -1,5 +1,5 @@
 apiVersion: v2
-name: tabris
+name: davalid
 description: Darwinia Network Runner
 
 # A chart can be either an 'application' or a 'library' chart.
