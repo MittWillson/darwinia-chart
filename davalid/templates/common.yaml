@@ -122,7 +122,10 @@ initContainers:
       #
       - name: CHOWN
         value: 1000:1000
-
+persistence:
+  snapshot:
+    enabled: true
+    type: emptyDir
 {{- end -}}
 {{- end -}}
 
