@@ -53,6 +53,7 @@ controller:
   enabled: true
   # Valid options are deployment, daemonset or statefulset
   type: statefulset
+  strategy: RollingUpdate
 
 # -- When using hostNetwork make sure you set dnsPolicy to `ClusterFirstWithHostNet`
 hostNetwork: false
@@ -81,10 +82,10 @@ service:
     type: ClusterIP
     ports:
       http:
-        enabled: true
+        enabled: false
         port: 9933
       wss:
-        enabled: true
+        enabled: false
         port: 9944
       p2p:
         enabled: true
@@ -177,4 +178,4 @@ persistence:
     # -- Set to true to retain the PVC upon `helm uninstall`
     retain: false
 
-initContainers: []
+initContainers: {}
