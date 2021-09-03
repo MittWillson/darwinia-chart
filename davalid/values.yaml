@@ -89,7 +89,8 @@ service:
       p2p:
         enabled: true
         port: 30333
-        containerPort: 30333
+        # nodePort: 30333
+        targetPort: 30333
 
 ingress:
   main:
