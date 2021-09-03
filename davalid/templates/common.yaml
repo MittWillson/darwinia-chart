@@ -4,7 +4,6 @@
 {{- $runtime := .Values.config.network | default "darwinia" -}}
 {{- $mode := .Values.config.mode | default "node" -}}
 {{- $isValidator := eq $mode "validator" }}
-{{- $pruning := $isValidator | ternary "archive" .Values.config.pruning -}}
 command: ["darwinia"]
 args:
   - "--base-path"
@@ -13,6 +12,8 @@ args:
   - "9933"
   - "--ws-port"
   - "9944"
+  - "--port"
+  - "30333"
   - "--name"
   - {{ include "davalid.runnerName" . | quote }}
   {{- if $runtime }}
@@ -22,9 +23,9 @@ args:
   {{- if $isValidator }}
   - "--validator"
   {{- end }}
-  {{- if $pruning }}
+  {{- if .Values.config.pruning }}
   - "--pruning"
-  - {{ $pruning | quote }}
+  - {{ .Values.config.pruning | quote }}
   {{- end }}
   {{- if .Values.config.fastSync }}
   - "--wasm-execution"
