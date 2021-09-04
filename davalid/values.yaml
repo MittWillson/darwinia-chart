@@ -33,6 +33,8 @@ config:
   # When validating, it defaults to archive mode
   # If you want running archive mode without validator, set archive
   pruning:
+  # If you are using snapshot for validator, you may need running on unsafe pruning mode with true
+  unsafePruning:
   # If you are first sync archive node, set true will faster, after synced you should set false
   # This will take more memory and cpu
   fastSync: false
@@ -53,7 +55,7 @@ controller:
   enabled: true
   # Valid options are deployment, daemonset or statefulset
   type: statefulset
-  strategy: RollingUpdate
+#  strategy: RollingUpdate
 
 # -- When using hostNetwork make sure you set dnsPolicy to `ClusterFirstWithHostNet`
 hostNetwork: false

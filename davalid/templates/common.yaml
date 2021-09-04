@@ -27,6 +27,9 @@ args:
   - "--pruning"
   - {{ .Values.config.pruning | quote }}
   {{- end }}
+  {{- if .Values.config.unsafePruning }}
+  - "--unsafe-pruning"
+  {{- end }}
   {{- if .Values.config.fastSync }}
   - "--wasm-execution"
   - "Compiled"
