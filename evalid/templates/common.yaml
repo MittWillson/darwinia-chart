@@ -1,6 +1,6 @@
 {{- include "common.values.setup" . }}
 
-{{- define "davalid.command" -}}
+{{- define "evalid.command" -}}
 {{- $runtime := .Values.config.network | default "darwinia" -}}
 {{- $mode := .Values.config.mode | default "node" -}}
 {{- $isValidator := eq $mode "validator" }}
@@ -15,7 +15,7 @@ args:
   - "--port"
   - "30333"
   - "--name"
-  - {{ include "davalid.runnerName" . | quote }}
+  - {{ include "evalid.runnerName" . | quote }}
   {{- if $runtime }}
   - "--chain"
   - {{ $runtime | quote }}
@@ -64,7 +64,7 @@ args:
   {{- end }}
 {{- end -}}
 
-{{- define "davalid.storage" -}}
+{{- define "evalid.storage" -}}
 {{- if .Values.snapshot.enabled -}}
 persistence:
   {{ .Values.persistence | toYaml | indent 2 }}
@@ -74,7 +74,7 @@ persistence:
 {{- end -}}
 {{- end -}}
 
-{{- define "davalid.snapshot" -}}
+{{- define "evalid.snapshot" -}}
 {{ if .Values.snapshot.enabled }}
 {{ $runtime := .Values.config.network | default "darwinia" }}
 
@@ -132,7 +132,7 @@ persistence:
 {{- end -}}
 {{- end -}}
 
-{{- $_ := mergeOverwrite .Values (include "davalid.snapshot" . | fromYaml) -}}
-{{- $_ = mergeOverwrite .Values (include "davalid.command" . | fromYaml) -}}
-{{- $_ = mergeOverwrite .Values (include "davalid.storage" . | fromYaml) -}}
+{{- $_ := mergeOverwrite .Values (include "evalid.snapshot" . | fromYaml) -}}
+{{- $_ = mergeOverwrite .Values (include "evalid.command" . | fromYaml) -}}
+{{- $_ = mergeOverwrite .Values (include "evalid.storage" . | fromYaml) -}}
 {{ include "common.all" . }}
