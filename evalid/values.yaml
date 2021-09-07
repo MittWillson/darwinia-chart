@@ -12,11 +12,13 @@ config:
   # E.g. darwinia and crab, default is darwinia
   network:
   # Validator or node, default value is node
+  # If you are Validator you should set `service.peer.enabled` true
   mode:
   # Show your self
   name: Evalid
   # If you want remote connect
   # If you are running validator mode, this should false or set unsafeExternal true
+  # You also need set `service.main.enabled` true
   external: false
   # WARNING!! this could be danger, only work when external is true
   # WARNING!! If you want to get session key, you should use port-forward by safe
@@ -79,22 +81,25 @@ securityContext: {}
 
 service:
   main:
-    enabled: true
+    enabled: false
     primary: true
     type: ClusterIP
     ports:
       http:
-        enabled: false
+        enabled: true
         port: 9933
       wss:
-        enabled: false
+        enabled: true
         port: 9944
+  peer:
+    enabled: false
+    type: NodePort
+    ports:
       p2p:
         enabled: true
         port: 30333
-        # nodePort: 30333
+        nodePort: 30333
         targetPort: 30333
-
 ingress:
   main:
     enabled: false
